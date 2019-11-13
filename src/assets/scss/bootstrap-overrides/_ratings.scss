@@ -1,0 +1,11 @@
+.ratings {
+  cursor: pointer;
+}
+
+.bs-rating-star {
+  font-size: 1.5rem;
+  color: $gray-500;
+  &.active {
+    color: $amber;
+  }
+}

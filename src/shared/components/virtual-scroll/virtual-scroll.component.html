@@ -1,0 +1,22 @@
+<ng-container *ngIf="items">
+  <cdk-virtual-scroll-viewport [itemSize]="itemSize">
+    <div
+      #itemsRef
+      class="listview listview--hover"
+      *cdkVirtualFor="
+        let item of items | filterEntities: filters;
+        trackBy: trackByIdx
+      "
+    >
+      <ng-container
+        *ngTemplateOutlet="scrollItem; context: { $implicit: item }"
+      ></ng-container>
+    </div>
+    <div
+      class="alert alert-light text-center"
+      *ngIf="(loaded$ | async) || (filteredLoaded$ | async)"
+    >
+      No hay más elementos
+    </div>
+  </cdk-virtual-scroll-viewport>
+</ng-container>

@@ -1,0 +1,23 @@
+<app-form-container
+  [model]="model"
+  [fields]="fields"
+  [buttonsConfig]="buttonsConfig"
+  [activity]="activity"
+  [focusOnFirstInput]="isSelected"
+  (emitChanged)="sendHasChanged()"
+  (emitSend)="submit($event)"
+>
+  <div class="d-flex" extras>
+    <ng-content select="[extraBtn]"></ng-content>
+    <button
+      extras
+      *ngIf="showRemoveBtn"
+      type="button"
+      [attr.aria-label]="'Eliminar ' + getName()"
+      class="btn btn-delete d-inline p-2 mr-2"
+      (click)="remove()"
+    >
+      <i class="zmdi zmdi-delete"></i> Eliminar
+    </button>
+  </div>
+</app-form-container>

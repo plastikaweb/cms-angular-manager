@@ -1,0 +1,39 @@
+<form
+  *ngIf="buttonsConfig"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  [ngClass]="{
+    'd-flex flex-row': !buttonsConfig.showLabel
+  }"
+>
+  <formly-form
+    (modelChange)="modelChange($event)"
+    [model]="model"
+    [fields]="fields"
+    [form]="form"
+    [options]="options"
+  ></formly-form>
+  <div class="d-flex flex-{{ buttonsConfig.layout }} justify-content-end">
+    <ng-content select="[extras]"></ng-content>
+
+    <div class="d-flex">
+      <button
+        *ngIf="
+          (!form.pristine && !buttonsConfig.pristineVisible) ||
+          buttonsConfig.alwaysVisible
+        "
+        type="submit"
+        [attr.aria-label]="'Guardar cambios para ' + model.name"
+        class="btn"
+        [ngClass]="{
+          'btn-primary': buttonsConfig.showLabel,
+          'ml-1 mt-0 mr-0 mb-0 p-0 btn--icon btn--icon-primary': !buttonsConfig.showLabel
+        }"
+        [disabled]="!form.valid || activity"
+      >
+        <i *ngIf="buttonsConfig.showIcon" class="zmdi zmdi-check-circle"></i>
+        <span *ngIf="buttonsConfig.showLabel"> Guardar</span>
+      </button>
+    </div>
+  </div>
+</form>

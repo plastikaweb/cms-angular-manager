@@ -1,0 +1,28 @@
+<app-activitybar [isLoading$]="isLoading$"></app-activitybar>
+
+<app-notification
+  [showNotification$]="showNotification$"
+  (emitCloseNotification)="onCloseNotification()"
+></app-notification>
+
+<main class="main" [attr.data-ma-theme]="theme$ | async">
+  <app-header
+    [client]="client$ | async"
+    [sidebarVisibility]="sidebarVisibility$ | async"
+    (emitSidebarVisibility)="toggleSidebar()"
+  ></app-header>
+  <app-navigation
+    [sidebarVisibility]="sidebarVisibility$ | async"
+    [navigation]="navigation"
+  ></app-navigation>
+  <router-outlet></router-outlet>
+</main>
+
+<app-modal-wrapper [config$]="confirmModalConfig$">
+  <app-confirmation-modal-content
+    *ngIf="confirmModalConfig$ | async as config"
+    [config]="config"
+    (emitClose)="closeModal()"
+    (emitAction)="config.action($event)"
+  ></app-confirmation-modal-content>
+</app-modal-wrapper>

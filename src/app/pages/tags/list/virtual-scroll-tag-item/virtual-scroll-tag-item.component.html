@@ -1,0 +1,17 @@
+<a
+  element
+  class="listview__item listview__item--hover"
+  [routerLink]="[item.id]"
+>
+  <div class="listview__content d-flex flex-row justify-content-between">
+    <h3 class="listview__heading">{{ item.name }}</h3>
+    <div class="flags">
+      <span
+        [attr.aria-label]="flag"
+        [attr.class]="'flag-icon flag-icon-' + printFlag(flag)"
+        *ngFor="let flag of item.cultures | getKeys; trackBy: trackByCulture"
+      >
+      </span>
+    </div>
+  </div>
+</a>

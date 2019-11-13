@@ -1,0 +1,53 @@
+<app-main-content-container *ngIf="pageConfig$ | async as config">
+  <h1 [innerHTML]="config.text.header"></h1>
+  <span title>{{ config.text.listTitle }}</span>
+  <span subtitle
+    >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum ea,
+    adipisci deserunt omnis sint totam nostrum temporibus repellendus quas
+    voluptate dolores quos alias cupiditate, blanditiis, modi nam consequatur
+    quam eos.</span
+  >
+
+  <div body>
+    <div
+      class="d-flex flex-md-row-reverse flex-column justify-content-between mb-5"
+    >
+      <a
+        class="btn btn-primary btn-lg float-right"
+        [routerLink]="['../../tag-families']"
+      >
+        <i class="zmdi zmdi-tag"></i> Listado de familias
+      </a>
+
+      <app-entity-list-view-filter
+        [filters]="config.filter"
+        [debouncetime]="400"
+        (applyFilter)="filter($event)"
+      >
+        <span class="badge badge-pill badge-info" body
+          >{{ visibleTagsLength$ | async }} etiquetas</span
+        >
+      </app-entity-list-view-filter>
+    </div>
+
+    <app-virtual-scroll
+      [items]="tags$ | async"
+      [itemSize]="itemSize"
+      [totalItems]="totalTags$ | async"
+      [appliedFilters]="appliedFilters"
+      [batchSize]="batchSize$ | async"
+      [pageNumber]="pageNumber$ | async"
+      [loaded$]="tagsLoaded$"
+      [filteredLoaded$]="filteredTagsLoaded$"
+      (emitNewPage)="getTags($event)"
+      (emitFilteredItemsLength)="getListLength($event)"
+    >
+      <ng-template #scrollItem let-item>
+        <app-virtual-scroll-tag-item
+          [item]="item"
+          [cultures]="cultures"
+        ></app-virtual-scroll-tag-item>
+      </ng-template>
+    </app-virtual-scroll>
+  </div>
+</app-main-content-container>

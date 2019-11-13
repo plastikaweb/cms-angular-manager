@@ -1,0 +1,21 @@
+<div class="d-flex flex-column">
+  <textarea
+    class="form-control"
+    [id]="id"
+    [formControl]="formControl"
+    [placeholder]="to.placeholder"
+    [maxLength]="to.maxLength"
+    [minLength]="to.minLength"
+    (keyup)="count()"
+  ></textarea>
+  <p class="counter text-right mb-3">
+    <span
+      class="counted-chars"
+      [ngClass]="{
+        'warning-chars-count': to.maxLength - countedChars < 50,
+        'alert-chars-count': to.maxLength - countedChars < 10
+      }"
+      >{{ countedChars }}</span
+    >/{{ to.maxLength }}
+  </p>
+</div>

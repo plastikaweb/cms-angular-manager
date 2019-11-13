@@ -1,0 +1,39 @@
+<app-main-content-container *ngIf="pageConfig$ | async as config">
+  <h1 [innerHTML]="config.text.header"></h1>
+  <span title>{{ config.text.createTitle }}</span>
+  <span subtitle
+    >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum ea,
+    adipisci deserunt omnis sint totam nostrum temporibus repellendus quas
+    voluptate dolores quos alias cupiditate, blanditiis, modi nam consequatur
+    quam eos.</span
+  >
+  <div body>
+    <div
+      class="d-flex flex-md-row-reverse flex-column justify-content-between mb-5"
+    >
+      <a
+        class="btn btn-primary btn-lg float-right"
+        [routerLink]="['../../../']"
+      >
+        <i class="zmdi zmdi-seat"></i> Listado de salas
+      </a>
+    </div>
+
+    <app-form-container
+      [fields]="config.fields | async"
+      [activity]="activity$ | async"
+      [buttonsConfig]="config.buttons.create"
+      (emitChanged)="sendHasChanged($event)"
+      (emitSend)="submit($event)"
+    >
+      <a
+        extras
+        [attr.aria-label]="'Cancelar creación de sala'"
+        class="btn btn-delete d-inline p-2 mr-2"
+        [routerLink]="['../../../']"
+      >
+        Cancelar
+      </a>
+    </app-form-container>
+  </div>
+</app-main-content-container>

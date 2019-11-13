@@ -1,0 +1,36 @@
+@import '../../../assets/scss/inner-imports';
+
+.entity-list--filters-bar {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+
+  .entity-list--text {
+    width: auto;
+  }
+
+  .entity-list--select {
+    min-width: 15rem;
+  }
+
+  & > div {
+    margin-right: 3rem;
+  }
+
+  @include media-breakpoint-down(xs) {
+    .entity-list--select {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+    & > div {
+      margin: 0 0 1rem;
+    }
+
+    .entity-list--text,
+    .entity-list--select {
+      width: 100%;
+    }
+  }
+}

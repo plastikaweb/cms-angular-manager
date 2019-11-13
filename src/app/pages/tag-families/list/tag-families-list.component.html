@@ -1,0 +1,95 @@
+<app-main-content-container *ngIf="pageConfig$ | async as config">
+  <h1 [innerHTML]="config.text.header"></h1>
+  <span title>{{ config.text.listTitle }}</span>
+  <span subtitle>
+    <div class="listview d-flex flex-wrap">
+      <div class="listview__item btn--icon-action">
+        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+        <span>Editar nombre de la familia</span>
+      </div>
+      <div class="listview__item btn--icon-action">
+        <i class="zmdi zmdi-plus-circle zmdi-hc-fw"></i>
+        <span>Añadir una nueva subfamilia</span>
+      </div>
+      <div class="listview__item btn--icon-success">
+        <i class="zmdi zmdi-tag zmdi-hc-fw"></i>
+        <span>Editar traducciones de la etiqueta vinculada a la familia</span>
+      </div>
+      <div class="listview__item btn--icon-action">
+        <i class="zmdi zmdi-tag zmdi-hc-fw"></i>
+        <span>Añadir etiqueta y traducciones vinculadas a la familia</span>
+      </div>
+    </div>
+  </span>
+  <div body>
+    <div
+      class="d-flex flex-md-row-reverse flex-column justify-content-between mb-5"
+    >
+      <a class="btn btn-primary btn-lg" [routerLink]="['../../tags']">
+        <i class="zmdi zmdi-tag"></i> Listado de etiquetas
+      </a>
+
+      <div
+        class="d-flex flex-sm-row flex-column flex-grow-1 align-items-center"
+      >
+        <div class="d-flex p-0 mr-0">
+          <div class="p-2 mr-2 w-auto h-auto">
+            <input
+              #name
+              (keyup)="doFilter({ name: name.value })"
+              placeholder="Filtrar por nombre"
+              class="form-control"
+            />
+          </div>
+          <div class="p-0 my-0 ml-2 mr-5 form-group d-flex align-items-center">
+            <span class="mr-2">Pendientes</span>
+            <div class="toggle-switch toggle-switch--dark-blue">
+              <input
+                #pending
+                type="checkbox"
+                class="toggle-switch__checkbox"
+                (change)="doFilter({ pending: pending.checked })"
+              />
+              <i class="toggle-switch__helper"></i>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-sm-row">
+          <button
+            type="button"
+            aria-label="Colapsar"
+            class="btn btn-light d-inline p-2 mr-2 d-flex align-items-center"
+            (click)="toggleTree(true)"
+          >
+            <i class="zmdi zmdi-chevron-up pr-2"></i> Colapsar
+          </button>
+
+          <button
+            type="button"
+            aria-label="Expandir"
+            class="btn btn-light d-inline p-2 mr-2 d-flex align-items-center"
+            (click)="toggleTree(false)"
+          >
+            <i class="zmdi zmdi-chevron-down pr-2"></i> Expandir
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <app-custom-tree
+      [nodes]="tagFamilies$ | async"
+      [options]="config.tree"
+      [buttonsConfig]="config.buttons.list"
+      [editFields]="config.fields.update"
+      [newFields]="config.fields.create"
+      [lastNode$]="lastNode$"
+      [isTreeCollapsed$]="isTreeCollapsed$"
+      [filterValue$]="filterValue$"
+      (emitNodesOrder)="setTagFamiliesOrder($event)"
+      (emitNewNode)="addNewTagFamily($event)"
+      (emitEditNode)="editTagFamily($event)"
+      (emitEditTag)="goToEditTag($event)"
+      (emitNewTag)="goToNewTag($event)"
+    ></app-custom-tree>
+  </div>
+</app-main-content-container>

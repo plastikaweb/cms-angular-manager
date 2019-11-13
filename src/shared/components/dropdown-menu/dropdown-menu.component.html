@@ -1,0 +1,12 @@
+<div dropdown>
+  <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
+  <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+    <a
+      (click)="dispatchAction(action)"
+      class="dropdown-item"
+      *ngFor="let action of actions; trackBy: trackByAction"
+    >
+      {{ action }}
+    </a>
+  </div>
+</div>

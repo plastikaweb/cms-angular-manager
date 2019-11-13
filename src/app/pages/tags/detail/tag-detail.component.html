@@ -1,0 +1,54 @@
+<app-main-content-container *ngIf="pageConfig$ | async as config">
+  <h1 [innerHTML]="config.text.header"></h1>
+  <span title *ngIf="selectedTag$ | async as tag; else tagFamily"
+    >{{ config.text.editTitle }} "{{ tag.name }}"</span
+  >
+  <ng-template #tagFamily>
+    <span title *ngIf="selectedTagFamily$ | async as familyTag"
+      >{{ config.text.createTitle }} "{{ familyTag.name }}"</span
+    >
+  </ng-template>
+
+  <span subtitle
+    >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum ea,
+    adipisci deserunt omnis sint totam nostrum temporibus repellendus quas
+    voluptate dolores quos alias cupiditate, blanditiis, modi nam consequatur
+    quam eos.</span
+  >
+  <div body>
+    <div class="d-flex flex-md-row-reverse mb-5">
+      <a
+        class="btn btn-primary btn-lg ml-2"
+        [routerLink]="
+          (selectedTagFamily$ | async)
+            ? ['../../../../../tag-families']
+            : ['../../../../tag-families']
+        "
+      >
+        <i class="zmdi zmdi-view-list-alt"></i> Listado de familias
+      </a>
+      <a
+        class="btn btn-primary btn-lg"
+        [routerLink]="
+          (selectedTag$ | async)
+            ? ['../../../../tags']
+            : ['../../../../../tags']
+        "
+      >
+        <i class="zmdi zmdi-tag"></i> Listado de etiquetas
+      </a>
+    </div>
+
+    <app-tag-cultures-accordion
+      [fields]="config.fields"
+      [buttonsConfig]="config.buttons.default"
+      [cultures]="cultures"
+      [activity]="activity$ | async"
+      [tag]="selectedTag$ | async"
+      (emitTagUpdate)="updateTag($event)"
+      (emitTagCreate)="createTag($event)"
+      (emitTagChanged)="emitTagHasChanged($event)"
+    >
+    </app-tag-cultures-accordion>
+  </div>
+</app-main-content-container>

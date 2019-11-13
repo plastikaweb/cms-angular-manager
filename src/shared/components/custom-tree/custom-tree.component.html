@@ -1,0 +1,28 @@
+<div class="d-flex flex-column">
+  <div class="d-flex flex-row align-items-center">
+    <span>Añadir familia base</span>
+    <app-custom-tree-node-edition
+      [node]="null"
+      [newFields]="newFields"
+      [buttonsConfig]="buttonsConfig"
+      [createAlwaysVisible]="true"
+      (emitNewNode)="addNewNode($event)"
+      class="p-2 m-2 w-25"
+    ></app-custom-tree-node-edition>
+  </div>
+  <tree-root #tree class="tree" [nodes]="nodes" [options]="internalOptions">
+    <ng-template #treeNodeTemplate let-node let-index="index">
+      <app-custom-tree-node-edition
+        [node]="node"
+        [editModel]="{ name: (node && node.data && node.data.name) || '' }"
+        [newFields]="newFields"
+        [editFields]="editFields"
+        [buttonsConfig]="buttonsConfig"
+        (emitNewNode)="addNewNode($event)"
+        (emitEditNode)="editNode($event)"
+        (emitEditTag)="editTag($event)"
+        (emitNewtTag)="newTag($event)"
+      ></app-custom-tree-node-edition>
+    </ng-template>
+  </tree-root>
+</div>

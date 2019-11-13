@@ -1,0 +1,12 @@
+@import '../../../assets/scss/inner-imports';
+
+.counter {
+  color: $blue-grey;
+  font-size: 0.9rem;
+  > .warning-chars-count {
+    color: $orange;
+  }
+  > .alert-chars-count {
+    color: $red;
+  }
+}

@@ -1,0 +1,36 @@
+<aside class="sidebar" [class.toggled]="sidebarVisibility">
+  <perfect-scrollbar>
+    <ul class="navigation">
+      <li
+        *ngFor="let item of navigation; trackBy: trackByItem"
+        routerLinkActive="navigation__active"
+      >
+        <a *ngIf="item.route; else noLinkGroup" [routerLink]="item.route"
+          ><i class="zmdi" [ngClass]="item.icon"></i>{{ item.title }}</a
+        >
+        <ng-template #noLinkGroup>
+          <p><i class="zmdi" [ngClass]="item.icon"></i>{{ item.title }}</p>
+        </ng-template>
+        <ul *ngIf="item.children">
+          <li
+            *ngFor="let subitem of item.children; trackBy: trackByItem"
+            routerLinkActive="navigation__sub--active"
+            [routerLinkActiveOptions]="subitem.routerLinkActiveOptions"
+            class="navigation__sub"
+          >
+            <a *ngIf="subitem.type === 'collapse'; else subgroupLink"
+              ><i class="zmdi" [ngClass]="subitem.icon"></i
+              >{{ subitem.title }}</a
+            >
+            <ng-template #subgroupLink>
+              <a [routerLink]="subitem.route"
+                ><i class="zmdi" [ngClass]="subitem.icon"></i
+                >{{ subitem.title }}</a
+              >
+            </ng-template>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </perfect-scrollbar>
+</aside>

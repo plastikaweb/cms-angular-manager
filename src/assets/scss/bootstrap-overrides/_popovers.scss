@@ -1,0 +1,10 @@
+.popover {
+  font-size: 1rem;
+  box-shadow: $popover-box-shadow;
+  padding: 15px 10px;
+  .popover-header {
+    padding: 8px 14px;
+    color: $gray-800;
+    background-color: $white;
+  }
+}

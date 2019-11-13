@@ -1,0 +1,4 @@
+.tooltip {
+  @include reset-text();
+  &.show { opacity: $tooltip-opacity; }
+}

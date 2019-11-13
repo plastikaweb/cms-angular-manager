@@ -1,0 +1,13 @@
+<header class="header">
+  <app-navigation-trigger
+    [sidebarVisibility]="sidebarVisibility"
+    (emitSidebarVisibility)="toggleSidebar()"
+  ></app-navigation-trigger>
+  <div class="header__logo">
+    <h1>
+      <a [routerLink]="['/', client.slug]"
+        ><img src="{{assetsUrl}}assets{{ client.imageRoute }}" [alt]="client.title"
+      /></a>
+    </h1>
+  </div>
+</header>

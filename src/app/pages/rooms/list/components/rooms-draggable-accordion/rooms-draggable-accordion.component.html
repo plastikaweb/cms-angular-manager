@@ -1,0 +1,37 @@
+<accordion
+  [closeOthers]="true"
+  class="accordion"
+  cdkDropList
+  (cdkDropListDropped)="reorderRooms($event)"
+>
+  <accordion-group
+    class="box accordion-group"
+    cdkDragLockAxis="y"
+    cdkDrag
+    [isOpen]="room.id === selectedGroupId"
+    (isOpenChange)="clickGroup($event, room.id)"
+    *ngFor="let room of groups | filterEntities: filters; trackBy: trackByRoom"
+  >
+    <div accordion-heading cdkDragHandle>
+      <app-accordion-group-header [group]="room">
+        <app-badge
+          left
+          *ngFor="let action of room.actions; trackBy: trackByAction"
+          [name]="action.name"
+          className="badge-secondary"
+        ></app-badge>
+      </app-accordion-group-header>
+    </div>
+    <app-accordion-group-body
+      [isSelected]="room.id === selectedGroupId"
+      [group]="room"
+      [buttonsConfig]="buttonsConfig"
+      [fields]="fields"
+      [activity]="activity"
+      [injectedPresenter]="presenter"
+      (emitChange)="updateRoom($event)"
+      (emitHasChanged)="sendHasChanged($event)"
+      (emitRemove)="removeRoom($event)"
+    ></app-accordion-group-body>
+  </accordion-group>
+</accordion>

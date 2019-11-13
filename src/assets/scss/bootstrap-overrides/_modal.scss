@@ -1,0 +1,30 @@
+.modal-content {
+  text-align: left;
+  box-shadow: $modal-content-box-shadow-sm-up;
+}
+.modal-header {
+  border-bottom: 0;
+}
+
+.modal-footer {
+  padding-top: 0.8rem;
+  border-top: 0;
+}
+
+@include media-breakpoint-up(sm) {
+  .modal {
+    text-align: center;
+
+    &:before {
+      content: '';
+      height: 100%;
+      width: 1px;
+    }
+
+    &:before,
+    .modal-dialog {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}

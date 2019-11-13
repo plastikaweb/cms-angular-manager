@@ -1,0 +1,31 @@
+<div class="entity-list--filters-bar p-2">
+  <div
+    *ngFor="let filter of filters; trackBy: trackByFilter"
+    [attr.class]="'entity-list--' + filter.inputType"
+  >
+    <div *ngIf="filter.inputType === 'text'">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Filtrar por {{ filter.name }}"
+        (keyup)="updateFilters(filter, $event.target.value)"
+      />
+    </div>
+    <div *ngIf="filter.inputType === 'select'">
+      <ngx-select
+        [multiple]="false"
+        [items]="filter.items"
+        [allowClear]="true"
+        placeholder="Filtrar por {{ filter.name }}"
+        (selectionChanges)="
+          updateFilters(
+            filter,
+            $event && $event[0] ? $event[0].data.value : null
+          )
+        "
+      >
+      </ngx-select>
+    </div>
+  </div>
+  <ng-content select="[body]"></ng-content>
+</div>

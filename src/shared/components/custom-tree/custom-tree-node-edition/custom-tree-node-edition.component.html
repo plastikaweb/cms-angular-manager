@@ -1,0 +1,78 @@
+<div class="d-flex flex-row">
+  <span *ngIf="node && !editionVisible" style="line-height: 1.5rem">{{
+    node && node.data && node.data.name
+  }}</span>
+
+  <button
+    *ngIf="!editionVisible && editFields"
+    class="ml-1 mt-0 mr-0 mb-0 p-0 btn btn--icon btn--icon-action"
+    (click)="toggleEditVisibility()"
+  >
+    <i class="zmdi zmdi-edit"></i>
+  </button>
+  <button
+    *ngIf="
+      (createAlwaysVisible && !editionNewVisible) ||
+      (!editionNewVisible &&
+        newFields &&
+        !editionVisible &&
+        node &&
+        node.data &&
+        !node.data.tagId)
+    "
+    class="ml-1 mt-0 mr-0 mb-0 p-0 btn btn--icon btn--icon-action"
+    (click)="toggleNewVisibility()"
+  >
+    <i class="zmdi zmdi-plus-circle"></i>
+  </button>
+  <button
+    *ngIf="
+      node &&
+      node.data &&
+      (!node.data.children ||
+        (node.data.children && !node.data.children.length)) &&
+      !editionVisible
+    "
+    extras
+    class="ml-1 mt-0 mr-0 mb-0 p-0 btn btn--icon"
+    [ngClass]="{
+      'btn--icon-success': !!node.data.tagId,
+      'btn--icon-action': !node.data.tagId
+    }"
+    (click)="goToEditOrNewTag(!!node.data.tagId)"
+  >
+    <i class="zmdi zmdi-tag"></i>
+  </button>
+</div>
+<div *ngIf="editionVisible && editFields" class="input-group">
+  <app-form-container
+    [model]="editModel"
+    [fields]="editFields"
+    [buttonsConfig]="buttonsConfig"
+    (emitSend)="submitEdit($event)"
+  >
+    <button
+      extras
+      class="ml-1 mt-0 mr-0 mb-0 p-0 btn btn--icon btn--icon-danger"
+      (click)="toggleEditVisibility()"
+    >
+      <i class="zmdi zmdi-close-circle"></i>
+    </button>
+  </app-form-container>
+</div>
+<div *ngIf="editionNewVisible && newFields" class="input-group">
+  <app-form-container
+    [model]="newModel"
+    [fields]="newFields"
+    [buttonsConfig]="buttonsConfig"
+    (emitSend)="submitNew($event)"
+  >
+    <button
+      extras
+      class="ml-1 mt-0 mr-0 mb-0 p-0 btn btn--icon btn--icon-danger"
+      (click)="toggleNewVisibility()"
+    >
+      <i class="zmdi zmdi-close-circle"></i>
+    </button>
+  </app-form-container>
+</div>

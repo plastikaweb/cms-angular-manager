@@ -1,0 +1,10 @@
+<section class="content" @fade>
+  <header class="content__title">
+    <ng-content select="h1"></ng-content>
+  </header>
+  <app-card>
+    <ng-content select="[title]" title></ng-content>
+    <ng-content select="[subtitle]" subtitle></ng-content>
+    <ng-content select="[body]" body></ng-content>
+  </app-card>
+</section>

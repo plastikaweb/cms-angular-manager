@@ -1,0 +1,110 @@
+{
+  "clients": {
+    "baviera": {
+      "title": "Clínica Baviera / Marco Polo",
+      "slug": "baviera",
+      "theme": "dark-blue",
+      "imageRoute": "/images/clinicabaviera_logo.png"
+    },
+    "optretina": {
+      "title": "OPT Retina",
+      "slug": "optretina",
+      "theme": "teal",
+      "imageRoute": "/images/optretina_logo.png"
+    }
+  },
+  "cultures": {
+    "es": {
+      "code": "es",
+      "name": "castellano",
+      "icon": "es",
+      "default": true
+    },
+    "en": {
+      "code": "en",
+      "name": "english",
+      "icon": "gb"
+    },
+    "ca": {
+      "code": "ca",
+      "name": "català",
+      "icon": "es-ct"
+    },
+    "zh": {
+      "code": "zh",
+      "name": "chinese",
+      "icon": "cn"
+    }
+  },
+  "pages": {
+    "home": {
+      "segment": "home"
+    },
+    "rooms": {
+      "segment": "rooms"
+    },
+    "actions": {
+      "segment": "actions"
+    },
+    "tagFamilies": {
+      "segment": "tag-families"
+    },
+    "tags": {
+      "segment": "tags"
+    }
+  },
+  "navigation": [
+    {
+      "id": "home",
+      "title": "Inicio",
+      "type": "item",
+      "icon": "zmdi-home",
+      "route": [
+        "home"
+      ]
+    },
+    {
+      "id": "rooms",
+      "title": "Gestor de acciones en salas",
+      "type": "item",
+      "icon": "zmdi-seat",
+      "route": [
+        "rooms"
+      ],
+      "routerLinkActiveOptions": {
+        "exact": true
+      }
+    },
+    {
+      "id": "tags",
+      "title": "Etiquetas",
+      "type": "collapse",
+      "icon": "zmdi-tag",
+      "children": [
+        {
+          "id": "tag-families",
+          "title": "Listado de familias",
+          "type": "item",
+          "route": [
+            "tag-families"
+          ],
+          "routerLinkActiveOptions": {
+            "exact": true
+          }
+        },
+        {
+          "id": "tags",
+          "title": "Listado de etiquetas",
+          "type": "item",
+          "route": [
+            "tags"
+          ],
+          "routerLinkActiveOptions": {
+            "exact": true
+          }
+        }
+      ]
+    }
+  ],
+  "externalUrl": "https: //www.optretina.com"
+}

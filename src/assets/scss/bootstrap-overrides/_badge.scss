@@ -1,0 +1,20 @@
+.badge {
+  position: inherit !important;
+  display: inline-block;
+  padding: 0.25rem 0.3rem;
+  font-size: 80%;
+  font-weight: 500;
+  line-height: 1;
+  color: $white;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 2px;
+  margin-right: 2px;
+}
+
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}

@@ -1,0 +1,47 @@
+<accordion [closeOthers]="true" class="accordion">
+  <accordion-group
+    class="box accordion-group"
+    *ngFor="let culture of cultures; trackBy: trackByCulture"
+    (isOpenChange)="clickGroup(culture.code)"
+  >
+    <div accordion-heading>
+      <app-accordion-group-header
+        [group]="culture"
+        [draggableHandler]="draggableHandler"
+      >
+        <div left *ngIf="cultureDone(culture.code)">
+          <i class="zmdi zmdi-check-circle text-success"></i>
+        </div>
+        <div right>
+          <span
+            [attr.aria-label]="culture"
+            [attr.class]="'flag-icon flag-icon-' + culture.icon"
+          >
+          </span>
+        </div>
+      </app-accordion-group-header>
+    </div>
+    <app-accordion-group-body
+      [isSelected]="culture.code === selectedCulture"
+      [buttonsConfig]="buttonsConfig"
+      [showRemoveBtn]="false"
+      [fields]="fields"
+      [activity]="activity"
+      [injectedPresenter]="presenter"
+      [group]="getModel(culture.code)"
+      (emitChange)="sendTag($event)"
+      (emitHasChanged)="hasChanged($event)"
+    >
+      <a
+        extraBtn
+        [attr.aria-label]="'Cancelar creación de sala'"
+        class="btn btn-delete d-inline p-2 mr-2"
+        [routerLink]="
+          tag ? ['../../../../tags'] : ['../../../../../tag-families']
+        "
+      >
+        Cancelar
+      </a>
+    </app-accordion-group-body>
+  </accordion-group>
+</accordion>

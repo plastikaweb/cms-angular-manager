@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      <ng-content select="[title]"></ng-content>
+    </h4>
+    <h6 class="card-subtitle">
+      <ng-content select="[subtitle]"></ng-content>
+    </h6>
+    <div class="actions" *ngIf="actions.length">
+      <app-dropdown-menu
+        [actions]="actions"
+        (emitAction)="dispatchAction($event)"
+      >
+      </app-dropdown-menu>
+    </div>
+    <div class="card-body">
+      <div class="card-text">
+        <ng-content select="[body]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

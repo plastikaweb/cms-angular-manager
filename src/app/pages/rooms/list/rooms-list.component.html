@@ -1,0 +1,44 @@
+<app-main-content-container *ngIf="pageConfig$ | async as config">
+  <h1 [innerHTML]="config.text.header"></h1>
+  <span title>{{ config.text.listTitle }}</span>
+  <span subtitle
+    >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum ea,
+    adipisci deserunt omnis sint totam nostrum temporibus repellendus quas
+    voluptate dolores quos alias cupiditate, blanditiis, modi nam consequatur
+    quam eos.</span
+  >
+  <div body>
+    <div
+      class="d-flex flex-md-row-reverse flex-column justify-content-between mb-5"
+    >
+      <a class="btn btn-primary btn-lg float-right" [routerLink]="['../new']">
+        <i class="zmdi zmdi-plus-circle"></i> Crear sala
+      </a>
+
+      <app-entity-list-view-filter
+        [filters]="config.filter"
+        (applyFilter)="filter($event)"
+      >
+        <span class="badge badge-pill badge-info" body
+          >{{ filteredRoomsLength }} salas</span
+        >
+      </app-entity-list-view-filter>
+    </div>
+
+    <app-rooms-draggable-accordion
+      [groups]="rooms$ | async"
+      [fields]="config.fields | async"
+      [appliedFilters]="appliedFilters"
+      [activity]="activity$ | async"
+      [buttonsConfig]="config.buttons.list"
+      [selectedGroupId]="selectedRoomId$ | async"
+      (emitRoomUpdate)="updateRoom($event)"
+      (emitRoomChanged)="emitRoomHasChanged($event)"
+      (emitGroupClick)="clickRoom($event)"
+      (emitRoomRemove)="confirmRemoveRoom($event)"
+      (emitListReorder)="reorderRooms($event)"
+      (emitFilteredItemsLength)="setFilteredRoomsLength($event)"
+    >
+    </app-rooms-draggable-accordion>
+  </div>
+</app-main-content-container>

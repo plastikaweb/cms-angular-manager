@@ -1,0 +1,4 @@
+<app-main-content-container *ngIf="(pageConfig$ | async).text as textConfig">
+  <h1 [innerHTML]="textConfig.header"></h1>
+  <span title>{{ textConfig.title }}</span>
+</app-main-content-container>
